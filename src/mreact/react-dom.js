@@ -1,8 +1,5 @@
 function render (vnode, container) {
-    console.log('vnode: ', vnode, container)
-
     const node = createNode(vnode, container)
-
     container.appendChild(node)
 
 }
@@ -10,7 +7,6 @@ function render (vnode, container) {
 function updateFunctionComponent (vnode, parentNode) {
     const { type, props } = vnode
     let vvnode = type(props)
-    console.log(vvnode, ' vvnode ')
     const node = createNode(vvnode, parentNode)
     return node
 }
@@ -18,10 +14,11 @@ function updateFunctionComponent (vnode, parentNode) {
 function createNode (vnode, parentNode) {
     let node = null
     const { type, props } = vnode
-    console.log('=======')
-    console.log(vnode)
+    console.log(vnode, '$%^&*')
     if (typeof vnode.type === 'string') {
         node = document.createElement(type)
+    } else if (type.isReatComp) {
+        console.log('i am reactComp')
     } else if (typeof type === 'function'){
         node = updateFunctionComponent(vnode, parentNode)
     }
@@ -42,7 +39,7 @@ function createTextNode (children) {
     return document.createTextNode(children)
 }
 
-function reconcileChildren (children, container) {
+function reconcileChildren (children = [], container) {
     if (typeof children === 'string') {
         const textNode = createTextNode(children)
         container.appendChild(textNode)
