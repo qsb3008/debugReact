@@ -1,9 +1,21 @@
-import { Component } from './mreact';
-import ReactDOM from 'react-dom';
+import  Component from './mreact/Componnet';
+import ReactDOM from './mreact/react-dom';
 import './index.css';
 
-function Comp ({ name }) {
-  return (<div className="border">{name}</div>)
+function Comp({ name }) {
+  return (<div onClick={
+    () => {
+      console.log(666)
+    }
+  } className="border">{name}</div>)
+}
+
+class ClassComp extends Component {
+  render() {
+    return (<div>{
+      this.props.name
+    }</div>)
+  }
 }
 
 const jsx = (
@@ -13,7 +25,7 @@ const jsx = (
     <Comp name="abc">
     </Comp>
     <hr></hr>
-    {/* <ReactComp></ReactComp> */}
+    <ClassComp name="classComp"></ClassComp>
   </div>
 )
 
