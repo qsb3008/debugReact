@@ -1,22 +1,34 @@
-function createElement (type, config, children) {
-    console.log(type, config, children, '?')
-    if (config) {
-        delete config.__self
-        delete config.__source
-    }
+import {TEXT} from "./const";
 
-    const props = {
-        ...config,
-        children,
-        mreact: true
-    }
+function createElement(type, config, ...children) {
+  if (config) {
+    delete config.__self;
+    delete config.__source;
+  }
+  // ! 源码中做了详细处理，比如过滤掉key、ref等
+  const props = {
+    ...config,
+    children: children.map(child =>
+      typeof child === "object" ? child : createTextNode(child)
+    )
+  };
 
-    return {
-        type,
-        props
-    }
+  return {
+    type,
+    props
+  };
 }
 
-export {
-    createElement,
+function createTextNode(text) {
+  return {
+    type: TEXT,
+    props: {
+      children: [],
+      nodeValue: text
+    }
+  };
 }
+
+export default {
+  createElement
+};

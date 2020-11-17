@@ -1,5 +1,6 @@
 import  Component from './mreact/Componnet';
 import ReactDOM from './mreact/react-dom';
+import React from './mreact/index';
 import './index.css';
 
 function Comp({ name }) {
