@@ -12,6 +12,9 @@ function Comp({ name }) {
 }
 
 class ClassComp extends Component {
+  defaultProps = {
+    name: '光天化日之下'
+  }
   render() {
     return (<div>{
       this.props.name
@@ -26,7 +29,7 @@ const jsx = (
     <Comp name="abc">
     </Comp>
     <hr></hr>
-    <ClassComp name="classComp"></ClassComp>
+    <ClassComp name=""></ClassComp>
   </div>
 )
 

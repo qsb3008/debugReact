@@ -36,6 +36,19 @@ function updateFunctionComponent(vnode, parentNode) {
 function updateClassComponent(vnode, parentNode) {
   const {type, props} = vnode;
   let cmp = new type(props);
+  const { defaultProps } = cmp
+  for (const key in defaultProps) {
+    if (props.hasOwnProperty(key)) {
+      const element = props[key];
+      if (!element) {
+        props[key] = defaultProps[key]
+      }
+    } else {
+      props[key] = defaultProps[key]
+    }
+  }
+  console.log(cmp.defaultProps, 'dp')
+
   let vvnode = cmp.render();
   const node = createNode(vvnode, parentNode);
   return node;
